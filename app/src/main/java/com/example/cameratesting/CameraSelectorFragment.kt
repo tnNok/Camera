@@ -79,10 +79,15 @@ class CameraSelectorFragment : Fragment() {
                     characteristics.get(CameraCharacteristics.LENS_FACING)!!
                 )
 
+                var physicalCameraTitle = "physical camera list size: ${characteristics.physicalCameraIds.size} "
+                characteristics.physicalCameraIds.forEachIndexed { index, id ->
+                    physicalCameraTitle += "physical camera #${index + 1} id = $id, "
+                }
+
                 // All cameras *must* support JPEG output so we don't need to check characteristics
                 availableCameras.add(
                     FormatItem(
-                        "$orientation ($id, physic: ${characteristics.physicalCameraIds.size})",
+                        "Logical camera: $orientation id = $id, $physicalCameraTitle",
                         id,
                         ImageFormat.JPEG
                     )
