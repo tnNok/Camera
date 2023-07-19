@@ -6,6 +6,7 @@ import android.graphics.ImageFormat
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,6 +79,12 @@ class CameraSelectorFragment : Fragment() {
                 val orientation = lensOrientationString(
                     characteristics.get(CameraCharacteristics.LENS_FACING)!!
                 )
+
+                val afModeList = characteristics.get(CameraCharacteristics.CONTROL_AF_AVAILABLE_MODES)
+                Log.d("LDAF_TEST", "af mode list size = ${afModeList?.size}")
+                afModeList?.forEach {
+                    Log.d("LDAF_TEST", "af mode list id = $it")
+                }
 
                 var physicalCameraTitle = "physical camera list size: ${characteristics.physicalCameraIds.size} "
                 characteristics.physicalCameraIds.forEachIndexed { index, id ->
